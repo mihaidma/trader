@@ -1,5 +1,7 @@
 
 const ccxt = require('ccxt/ccxt.js')
+const chalk = require('chalk')
+
 const exchangeNames = [
   'kraken',
   'cex',
@@ -11,12 +13,12 @@ const symbol = 'ETH/USD'
 const sleep = (ms) => new Promise (resolve => setTimeout (resolve, ms))
 
 function printTicker (name, ticker) {
-  console.log(symbol, 'ticker',
+  console.log(chalk.green(symbol), 'ticker',
     ticker['datetime'],
-    'bid: ' + ticker['bid'],
-    'ask: ' + ticker['ask'],
+    'bid: ' + chalk.green(ticker['bid']),
+    'ask: ' + chalk.green(ticker['ask']),
     'volume: ' + ticker['quoteVolume'],
-    name
+    chalk.green(name)
   )
 }
 
@@ -50,18 +52,20 @@ fetchTickers().then(() => {
       const comparisonName = exchangeNames[j]
       const comparisonExchange = exchangeInstances[comparisonName].tickers[symbol]
         if (referenceExchange.ask < comparisonExchange.bid) {
-          console.log('arbitrage opportunity: ', symbol)
+          console.log(chalk.green('arbitrage opportunity: '), symbol)
           console.log(referenceName, ' BUY ', referenceExchange.ask)
           console.log(comparisonName, ' SELL ', comparisonExchange.bid)
           console.log('gain $: ', comparisonExchange.bid - referenceExchange.ask)
           console.log('gain %: ', comparisonExchange.bid / referenceExchange.ask - 1)
+          console.log('------')
         }
         else if (comparisonExchange.ask < referenceExchange.bid) {
-          console.log('arbitrage opportunity: ', symbol)
+          console.log(chalk.green('arbitrage opportunity: '), symbol)
           console.log(comparisonName, ' BUY ', comparisonExchange.ask)
           console.log(referenceName, ' SELL ', referenceExchange.bid)
           console.log('gain $: ', referenceExchange.bid - comparisonExchange.ask)
           console.log('gain %: ', referenceExchange.bid / comparisonExchange.ask - 1)
+          console.log('------')
         }
     }
   }
