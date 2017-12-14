@@ -25,7 +25,7 @@ function printTicker (name, ticker) {
 exchangeNames.forEach((name) => {
   exchangeInstances[name] = {
     name: name,
-    instance: ccxt[name](),
+    instance: new ccxt[name](),
     tickers: {}
   }
 })
