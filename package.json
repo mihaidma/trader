@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ccxt": "^1.7.114",
-    "chalk": "^2.1.0"
+    "ccxt": "^1.10.376",
+    "chalk": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.7"
   }
 }
